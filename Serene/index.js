@@ -1,4 +1,3 @@
-//	TIMER------------------------------------------------------------------
 document.getElementById("timerButton").addEventListener("click",startTimer);
 
 function startTimer(button){
@@ -9,7 +8,6 @@ function startTimer(button){
 		alert("Not possible!");
 		return;
 	}
-
 	let time = Math.floor(timerLength*60);
 
 	const countdownEl = document.getElementById('countdown');
@@ -26,15 +24,11 @@ function startTimer(button){
 		time--;
 		if (time==-1){
 			clearInterval(x);
-
 			button.innerText="Start Timer"
 			chrome.runtime.sendMessage("Time Over!");
 		}
 	}
 }
-
-
-//	ALARM------------------------------------------------------------------
 document.getElementById("alarmButton").addEventListener("click",setAlarm);
 var alarmSound = new Audio();
 alarmSound.src = 'sound.mp3';
@@ -46,7 +40,6 @@ function setAlarm(button) {
 		alert('Invalid Date');
 		return;
 	}
-
 	var alarm = new Date(ms);
 	var alarmTime = new Date(alarm.getUTCFullYear(), alarm.getUTCMonth(), alarm.getUTCDate(),  alarm.getUTCHours(), alarm.getUTCMinutes(), alarm.getUTCSeconds());
 	
@@ -60,7 +53,6 @@ function setAlarm(button) {
 	alarmTimer = setTimeout(ringAlarm, timeLeft);
 
 };
-
 function ringAlarm() {
 	alarmSound.play();
 	let alarmName = document.getElementById('alarmName').value;
@@ -70,19 +62,15 @@ function ringAlarm() {
 	chrome.runtime.sendMessage(msg);
 
 };
-
 document.getElementById("block").addEventListener("click",function(){
 	let site = document.getElementById("site").value
 	if(site.length>0){
 		chrome.runtime.sendMessage(site);
 	}
 })
-
 document.getElementById("unblock").addEventListener("click", function(){
 	chrome.runtime.sendMessage("unblock");
 })
-
-// TO DO --------------------------------------------------------------------
 document.getElementById("todoButton").addEventListener("click",function (e) {
 	e.preventDefault();
 	let tick = document.createElement("input");
